@@ -1,7 +1,7 @@
 """Буфер для хранения данных"""
 
 class DataBuffer:
-    def __init__(self, max_points=300):
+    def __init__(self, max_points=0):  # Изменено: по умолчанию 0 = без ограничений
         self.max_points = max_points
         self.raw_data = []
         self.voltage_data = []
@@ -11,8 +11,8 @@ class DataBuffer:
         self.raw_data.append(raw_value)
         self.voltage_data.append(voltage)
         
-        # Ограничиваем размер буфера
-        if len(self.raw_data) > self.max_points:
+        # Ограничиваем размер буфера только если max_points > 0
+        if self.max_points > 0 and len(self.raw_data) > self.max_points:
             self.raw_data = self.raw_data[-self.max_points:]
             self.voltage_data = self.voltage_data[-self.max_points:]
             
@@ -22,12 +22,12 @@ class DataBuffer:
         self.voltage_data.clear()
         
     def get_voltage_view(self):
-        """Получение представления для графика"""
-        return self.voltage_data[-self.max_points:] if self.voltage_data else []
+        """Получение представления для графика - ВСЕ данные"""
+        return self.voltage_data if self.voltage_data else []
     
     def get_raw_view(self):
-        """Получение сырых данных"""
-        return self.raw_data[-self.max_points:] if self.raw_data else []
+        """Получение сырых данных - ВСЕ данные"""
+        return self.raw_data if self.raw_data else []
     
     @property
     def count(self):

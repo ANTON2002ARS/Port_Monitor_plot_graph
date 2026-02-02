@@ -11,15 +11,14 @@ BAUDRATES = [
 
 ADC_BITS_OPTIONS = [8, 10, 12]
 REF_VOLTAGE_OPTIONS = [3.3, 5.0]
-PORT_TAGS = ["PORT1", "PORT2", "PORT3", "PORT4"]
-MAX_POINTS = 300
+SENSOR_TAGS = ["SENSOR_1", "SENSOR_2", "SENSOR_3", "SENSOR_4"]
 
-# Цвета по умолчанию для портов
+# Цвета по умолчанию для сенсоров (теперь в HEX формате для лучшей совместимости)
 DEFAULT_COLORS = {
-    "PORT1": "red",
-    "PORT2": "green", 
-    "PORT3": "blue",
-    "PORT4": "orange"
+    "SENSOR_1": "#ff0000",  # RED
+    "SENSOR_2": "#00ff00",  # GREEN
+    "SENSOR_3": "#0000ff",  # BLUE
+    "SENSOR_4": "#ffa500"   # ORANGE
 }
 
 # Стили кнопок

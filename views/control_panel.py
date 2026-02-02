@@ -20,15 +20,16 @@ class ControlPanel:
         control_column = tk.Frame(self.frame, bg='white')
         control_column.pack()
         
-        # Кнопки управления
+        # Кнопки управления с комментариями о блокировках
         buttons = [
             ("НАЧАТЬ", self.controller.start_monitoring, "green", "white"),
             ("ЗАВЕРШИТЬ", self.controller.stop_monitoring, "red", "white"),
-            ("ОТКРЫТЬ ГРАФИК", self.controller.load_graph, "white", "black"),
-            ("ОЧИСТИТЬ ГРАФИК", self.controller.clear_graph, "white", "black"),
+            ("ОТКРЫТЬ ГРАФИК", self.controller.load_graph, "white", "black"),  # Блокируется при мониторинге
+            ("ОЧИСТИТЬ ГРАФИК", self.controller.clear_graph, "white", "black"),  # Блокируется при мониторинге
             ("КОПИРОВАТЬ ЛОГИ", self.controller.copy_log, "white", "black"),
-            ("Обновить COM", self.controller.refresh_ports, "white", "black"),
-            ("ЧТО ЗА ПРОГА", self.controller.show_about, "blue", "white"),
+            ("Обновить COM", self.controller.refresh_ports, "white", "black"),  # Блокируется при мониторинге
+            ("ПЕРЕКЛЮЧИТЬ ГРАФИК", self.controller.toggle_display_mode, "blue", "white"),  # Блокируется при мониторинге
+            ("ЧТО ЗА ПРОГА", self.controller.show_about, "purple", "white"),
         ]
         
         for text, command, bg_color, fg_color in buttons:

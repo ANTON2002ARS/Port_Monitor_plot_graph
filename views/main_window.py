@@ -9,13 +9,13 @@ class MainWindow:
     def __init__(self, controller):
         self.controller = controller
         self.root = tk.Tk()
-        self.root.title("МОНИТОР ПОРТОВ")
+        self.root.title("МОНИТОР СЕНСОРОВ")
         self.root.geometry("900x850")
         self.root.configure(bg='white')
         
-        #self.root.iconbitmap('usb_port_.ico')
-        # Установка минимального размера окна (ширина x высота)
+        # Установка минимального размера окна
         self.root.minsize(900, 800)
+        
         # Создание графической области
         self.create_plot_area()
         
@@ -25,18 +25,24 @@ class MainWindow:
         
     def create_plot_area(self):
         """Создание области для графика"""
-        self.fig, self.ax = plt.subplots()
+        # Создаем фигуру с увеличенным соотношением сторон для лучшего горизонтального растяжения
+        self.fig = plt.Figure(figsize=(10, 5), dpi=100)  # Ширина 10, высота 5
+        self.ax = self.fig.add_subplot(111)
+        
+        # Настройка размеров шрифтов для осей
+        self.ax.tick_params(axis='both', which='major', labelsize=9)
+        
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-    def setup_ui(self, port_settings_view, adc_settings_view, control_panel, console_view):
+    def setup_ui(self, sensor_settings_view, adc_settings_view, control_panel, console_view):
         """Настройка пользовательского интерфейса"""
-        # Левая часть - настройки портов и консоль
+        # Левая часть - настройки сенсоров и консоль
         left_frame = tk.Frame(self.bottom_container, bg='white')
         left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
         
-        # Порты
-        port_settings_view.frame.pack(in_=left_frame, fill=tk.X, pady=(0, 10))
+        # Сенсоры
+        sensor_settings_view.frame.pack(in_=left_frame, fill=tk.X, pady=(0, 10))
         
         # Консоль
         console_view.frame.pack(in_=left_frame, fill=tk.BOTH, expand=True)
